@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
@@ -11,8 +11,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="RawRabbit" Version="1.10.3" />
     <PackageReference Include="RawRabbit.vNext" Version="1.10.3" />
+    <PackageReference Include="Warsztaty.Messages" Version="1.*" />
   </ItemGroup>
-  <ItemGroup>
+  <!--<ItemGroup>
     <ProjectReference Include="..\Warsztaty.Messages\Warsztaty.Messages.csproj" />
-  </ItemGroup>
+  </ItemGroup>-->
 </Project>
