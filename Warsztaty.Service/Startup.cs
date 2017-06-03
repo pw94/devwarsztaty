@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RawRabbit;
 using RawRabbit.vNext;
+using Warsztaty.Messages.Commands;
 using Warsztaty.Service.Framework;
+using Warsztaty.Service.Handlers;
 
 namespace Warsztaty.Service
 {
@@ -40,7 +43,7 @@ namespace Warsztaty.Service
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            ConfigureHandlers(app);
             app.UseMvc();
         }
 
@@ -51,7 +54,16 @@ namespace Warsztaty.Service
             section.Bind(options);
             services.Configure<RabbitMqOptions>(section);
             var client = BusClientFactory.CreateDefault(options);
-            services.AddSingleton(client);
+            services.AddSingleton<IBusClient>(client);
+            services.AddScoped<ICommandHandler<CreateRecord>, CreateRecordHandler>();
+        }
+
+        private void ConfigureHandlers(IApplicationBuilder app)
+        {
+            var client = app.ApplicationServices.GetService<IBusClient>();
+            client.SubscribeAsync<CreateRecord>((msg, ctx) =>
+                app.ApplicationServices.GetService
+                    <ICommandHandler<CreateRecord>>().HandleAsync(msg));
         }
     }
 }
