@@ -1,6 +1,6 @@
 namespace Warsztaty.Messages.Events
 {
-    public class RecordCreated
+    public class RecordCreated : IEvent
     {
         public string Key { get; set; }
 

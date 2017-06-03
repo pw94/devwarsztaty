@@ -1,6 +1,6 @@
 namespace Warsztaty.Messages.Events
 {
-    public class CreateRecordFailed
+    public class CreateRecordFailed : IEvent
     {
         public string Key { get; set; }
         public string Reason { get; set; }
