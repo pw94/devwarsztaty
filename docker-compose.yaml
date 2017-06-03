@@ -6,7 +6,7 @@ services:
       image: dadarek/wait-for-dependencies
       depends_on:
         - rabbitmq    
-  command: rabbitmq:5672
+      command: rabbitmq:5672
   
   rabbitmq:
       image: rabbitmq
@@ -25,4 +25,4 @@ services:
       links:
         - rabbitmq
       ports:
-        - '5050:5050''
+        - '5050:5050'
